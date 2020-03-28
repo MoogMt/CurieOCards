@@ -19,22 +19,24 @@ check = True
 try:
     connexion_server.connect((hote, port))
 except socket.error:
-    print("Error in connexion")
+    print("Connexion could not be established. Check host and/or port.")
     check = False
     pass
 
 if check:
-    print("Connexion établie avec le serveur ", str(hote) ,"sur le port ", str(port) )
+    print("Connexion established with the server ", str(hote) ," on port ", str(port) )
     msg_to_send = ""
-    while msg_to_send != str("end"):
+    while msg_to_send != "End":
+        # Reading message
         msg_to_send = str(input("> "))
-        # Peut planter si vous tapez des caractères spéciaux
-        msg_to_send = msg_to_send.encode()
-        # On envoie le message
-        connexion_server.send( msg_to_send )
-        msg_recu = connexion_server.recv(1024)
-        
-        print( msg_recu.decode() ) # Là encore, peut planter s'il y a des accents
+        # On 
+        connexion_server.send( msg_to_send.encode() )
+        # Getting the answer
+        msg_received = connexion_server.recv(1024).decode()
+        if msg_received != "Ok" :
+            print("Server shutdown: Communication issue.")
+            msg_to_send == "End"
+            check = False
 
-    print("Fermeture de la connexion")
+    print("End connexion")
     connexion_server.close()
