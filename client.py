@@ -24,11 +24,12 @@ try:
         # Reading message
         msg_to_send = str(input("> "))
         if msg_to_send == "" :
-            msg_to_send = "End"
+            continue
         if msg_to_send == "End" :
             print("Closing connexion, goodbye!")
             connexion_server.send( str("End").encode() )
-            connexion_server.close()    
+            connexion_server.close()
+            break
         # Sending message 
         connexion_server.send( msg_to_send.encode() )
         # Getting the answer
@@ -36,7 +37,6 @@ try:
         if msg_received != "Ok" :
             print("Server shutdown: Communication issue.")
             connexion_server.close()
-            
-
+            break
 except socket.error:
     print("Connexion could not be established. Check host and/or port.")

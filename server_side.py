@@ -17,7 +17,10 @@ import sys
 from _thread import *
 
 host = str( input("Enter the host IP: ") )
+if host == "" :
+    host = "localhost"
 port = int( input("Enter the port to listen to: ") )
+
 
 connexion_nb = int( input("Maximum number of connexions: ") )
 if connexion_nb < 1:
@@ -25,7 +28,9 @@ if connexion_nb < 1:
 
 server = socket.socket( socket.AF_INET, socket.SOCK_STREAM )
 server.setsockopt( socket.SOL_SOCKET, socket.SO_REUSEADDR, 1 ) # unsure about what this does...
-server.bind( ( host, port) )
+
+server.bind( ( str(host), port ) )
+
 socks = [server]
 server.listen( connexion_nb )
 devices={}
