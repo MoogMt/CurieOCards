@@ -13,7 +13,7 @@ accepted_colors = ["black","red","none"]
 accepted_shapes = ["trefle","pique","carreau","coeur","atout","joker"]
 accepted_values = ["As","Roi","Dame","Cavalier","Valet","10","9","8","7","6","5","4","3","2","1", # Standard Values
                    "21", "20" "19", "18", "17", "16", "15", "14", "13", "12", "11", "Excuse",  # Tarot
-                   "none"] # For joker  
+                   "Joker"] # For joker  
 
 class StdCard:
     """
@@ -37,8 +37,9 @@ class StdCard:
         else :
             print("Issue creating card with caracteristics - color: " + color + " shape: " + shape + " value: " + value )
             return
-        
-    # Accessors methods
+    """   
+         Accessors methods
+     """
     def get_color( self ):
         """Method that returns the color"""
         return self.color
@@ -51,8 +52,9 @@ class StdCard:
     def get_all( self ):
         """Method that returns all informations"""
         return self.color, self.shape, self.value
-    
-    # Modifyers
+    """
+     Modifyers
+     """
     def set_color( self, new_color ):
         """Method that modifies the hostna me of the server"""
         if new_color in accepted_colors :
@@ -83,16 +85,27 @@ class StdCard:
         return
     def set_all( self, new_color, new_shape, new_value ):
         self.set_color( new_color )
-        self.set_shape( new_color )
-        self.set_value( new_color )
+        self.set_shape( new_shape )
+        self.set_value( new_value )
         return
-    
+    """
+        PRINTERS
+    """
+    def print_color( self ):
+        print( "color: " + str( self.get_color() ) )
+        return
+    def print_shape( self ):
+        print( "shape: " + str( self.get_shape() ) )
+        return 
+    def print_value( self ):
+        print( "value: " + str( self.get_value() ) )
+        return
     def print_all( self ):
-        print("color: " + str(self.get_color())+"; shape: " + str(self.get_shape()) + "; value: " + str( self.get_value()) + ";" )
+        print( "color: " + str( self.get_color() ) + "; shape: " + str( self.get_shape() ) + "; value: " + str( self.get_value()) + ";"  )
         return
     
 
-def appendCardByValues( deck, color, shape, accepted_values):
+def appendCardByValues( deck, color, shape, accepted_values ):
     for value in accepted_values:
         deck.append( StdCard( color, shape, value) )
     return 
@@ -126,7 +139,7 @@ def initStandardDeck():
 def initStandardDeckWithJoker():
     deck = initStandardDeck()
     for i in range(2):
-        deck.append( StdCard("none","joker","none") )
+        deck.append( StdCard("none","joker","Joker") )
     return deck
 
 tarot_colors = reduced_colors
