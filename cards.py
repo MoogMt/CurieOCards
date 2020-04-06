@@ -136,11 +136,27 @@ def initStandardDeck():
             else:
                 appendCardByValues( deck, "red", shape, standard_values )
     return deck
+def initSeveralDecks( n_deck ):
+    deck = []
+    for i in range(n_deck):
+        deck_local = initStandardDeck()
+        for card in deck_local:
+            deck.append( card )
+    return deck
+
 def initStandardDeckWithJoker():
     deck = initStandardDeck()
     for i in range(2):
         deck.append( StdCard("none","joker","Joker") )
     return deck
+def initSeveralDecksWithJoker( n_deck ):
+    deck = []
+    for i in range(n_deck):
+        deck_local = initStandardDeckWithJoker()
+        for card in deck_local:
+            deck.append( card )
+    return deck
+
 
 tarot_colors = reduced_colors
 tarot_shapes = reduced_shapes

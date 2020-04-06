@@ -43,9 +43,15 @@ class Player:
         self.set_username( new_username )
         self.set_ip( new_ip )
         return
-    
+
+    def print_username( self ):
+        print( "username: "+ str( self.get_username() ) + ";" )
+        return
+    def print_ip( self ):
+        print("ip adress: " + str( self.get_ip() ) )
+        return
     def print_all( self ):
-        print("username: " + str(self.get_username())+"; ip: " + str(self.get_ip()) + ";" )
+        print( "username: " + str(self.get_username())+"; ip: " + str(self.get_ip()) + ";" )
         return
     
     
