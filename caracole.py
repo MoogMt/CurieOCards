@@ -84,10 +84,10 @@ class CaracolePlayer( Player ):
 
 n_cards_player = 7
 
-def caracoleRound( n_players ):
+def caracoleGame( n_players, deck, hands ):
     return
 
-def caracoleGame( n_players, n_shuffle, n_deck, limit_point_loose ):
+def caracoleFullGame( n_players, n_shuffle, n_deck, limit_point_loose ):
     deck = cards.initSeveralDecksWithJoker()
     if len(deck) >= n_cards_player*n_players:
         print( "The number of cards is not large enough for the number of players" )
