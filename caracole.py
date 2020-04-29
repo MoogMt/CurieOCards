@@ -84,19 +84,33 @@ class CaracolePlayer( Player ):
 
 n_cards_player = 7
 
-def caracoleGame( n_players, deck, hands ):
+def caracoleRound( players, deck, hands ):
+    deck = cards.initSeveralDecksWithJoker()
+    n_players = len(players)
+    hands, deck = cards.dealCards( deck, n_players, n_cards_player )
+    caracole = False
+    while not caracole:
+        for player in players:
+            if not player.getCaracole():
+                caracole = caracolePlay(player)
+                if caracole :
+                    break
     return
 
-def caracoleFullGame( n_players, n_shuffle, n_deck, limit_point_loose ):
-    deck = cards.initSeveralDecksWithJoker()
+def caracoleFullGame( players, n_shuffle, n_deck, limit_point_loose ):
+    # Number of players
+    n_players = len(players)
+    # Check whether the number of decks is sufficient to play
     if len(deck) >= n_cards_player*n_players:
         print( "The number of cards is not large enough for the number of players" )
         return False
-    hands, deck = cards.dealCards( deck, n_players, n_cards_player )
     max_point=0
     # The Caracole lasts as long as no player reaches 100
     while max_point < limit_point_loose:
-        player_points = caracoleRound( )
+        player_points, status = caracoleRound( )
+        if not status :
+            print("Something went wrong, stopping game.")
+            break
         max_point = max( player_points )
     # Determines who wins and looses
     winners, loosers = [], []
